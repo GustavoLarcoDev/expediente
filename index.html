@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Documentos</title>
+<style>
+:root{--bg:#f4f2ee;--card:#fff;--ink:#1c1d1f;--mut:#686a70;--line:#e2dfd8;--acc:#1f4e79;--acc-soft:#e7eef6;--chip:#f1ede4;--ok:#2d6a4f;--bad:#a4262c}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#141518;--card:#1e2024;--ink:#ececee;--mut:#a3a5ab;--line:#33363c;--acc:#8fb8e6;--acc-soft:#1f2a37;--chip:#2a2c31;--ok:#6fcf97;--bad:#ff8a80}}
+:root[data-theme="dark"]{--bg:#141518;--card:#1e2024;--ink:#ececee;--mut:#a3a5ab;--line:#33363c;--acc:#8fb8e6;--acc-soft:#1f2a37;--chip:#2a2c31;--ok:#6fcf97;--bad:#ff8a80}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:28px 16px 64px}
+header h1{font-size:24px;line-height:1.25;margin:0 0 6px;letter-spacing:-.01em}
+header p{margin:0;color:var(--mut)}
+.meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0 22px}
+.pill{font-size:13px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+.priv{display:flex;gap:8px;align-items:center}
+.priv svg{flex:none}
+button,.btn{font:inherit;font-size:14px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 12px;cursor:pointer;white-space:nowrap}
+button:hover{border-color:var(--mut)}
+button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+:root[data-theme="dark"] button.pri{color:#0d1620}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.pri{color:#0d1620}}
+button:disabled{opacity:.5;cursor:default}
+.start{background:var(--acc-soft);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:26px}
+.start b{display:block;font-size:16px}
+.start span{color:var(--mut);font-size:13px}
+section{margin:0 0 22px}
+section h2{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:0 0 8px;display:flex;gap:8px;align-items:baseline}
+section h2 .n{color:var(--acc)}
+.list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.row{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px 14px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.tab{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--chip);border-radius:6px;padding:6px 0;text-align:center}
+.t{min-width:0}
+.t div{overflow-wrap:anywhere}
+.t small{color:var(--mut);font-size:12.5px}
+.acts{display:flex;gap:6px}
+@media (max-width:560px){.row{grid-template-columns:44px minmax(0,1fr)}.acts{grid-column:2}.start{flex-direction:column;align-items:flex-start}}
+.prog{height:3px;background:var(--line);border-radius:2px;margin-top:6px;overflow:hidden;display:none}
+.prog i{display:block;height:100%;width:0;background:var(--acc);transition:width .15s}
+#msg{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:30px}
+#msg h1{font-size:20px;margin:0 0 8px}
+#msg p{margin:0;color:var(--mut)}
+.hidden{display:none!important}
+#visor{position:fixed;inset:0;background:rgba(10,11,13,.82);display:flex;flex-direction:column;z-index:10}
+#visor .bar{display:flex;gap:8px;align-items:center;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--line)}
+#visor .bar b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+#visor iframe{flex:1;border:0;width:100%;background:#525659}
+footer{margin-top:34px;color:var(--mut);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="msg">
+    <h1>Abriendo…</h1>
+    <p>Descifrando la lista de documentos.</p>
+  </div>
+
+  <div id="app" class="hidden">
+    <header>
+      <h1 id="titulo"></h1>
+      <p id="sub"></p>
+    </header>
+    <div class="meta">
+      <span class="pill" id="cuenta"></span>
+      <span class="pill" id="fecha"></span>
+      <span class="pill priv"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Enlace privado y cifrado: por favor no lo reenvíe</span>
+    </div>
+    <div class="start">
+      <div><b>Empiece aquí: índice y notas para la abogada</b><span id="inicioMeta"></span>
+        <div class="prog" id="p-inicio"><i></i></div></div>
+      <div class="acts"><button class="pri" id="verInicio">Ver índice</button><button id="bajarInicio">Descargar</button></div>
+    </div>
+    <div class="start" style="background:var(--card)">
+      <div><b>Descargar todo</b><span id="zipMeta"></span>
+        <div class="prog" id="p-zip"><i></i></div></div>
+      <div class="acts"><button id="zip">Descargar todo (.zip)</button></div>
+    </div>
+    <div id="secciones"></div>
+    <footer>Los documentos se descifran en su navegador; el servidor solo guarda archivos cifrados. Si algo no abre, avísele a quien le mandó el enlace.</footer>
+  </div>
+</div>
+
+<div id="visor" class="hidden">
+  <div class="bar">
+    <b id="vTitulo"></b>
+    <button id="vBajar">Descargar</button>
+    <button id="vTab">Abrir en pestaña</button>
+    <button class="pri" id="vCerrar">Cerrar</button>
+  </div>
+  <iframe id="vFrame" title="Documento"></iframe>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+let KEY=null, M=null; const cache=new Map();
+
+function b64u(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return Uint8Array.from(atob(s),c=>c.charCodeAt(0));}
+function mb(n){return n>=1e6?(n/1e6).toFixed(1).replace('.',',')+' MB':Math.max(1,Math.round(n/1e3))+' KB';}
+function fallo(t,d){$('app').classList.add('hidden');$('msg').classList.remove('hidden');$('msg').innerHTML='<h1></h1><p></p>';$('msg').querySelector('h1').textContent=t;$('msg').querySelector('p').textContent=d;}
+
+async function bajarCifrado(url,total,onp){
+  const r=await fetch(url,{cache:'no-cache'});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  if(!r.body||!onp) return new Uint8Array(await r.arrayBuffer());
+  const rd=r.body.getReader(), partes=[]; let n=0;
+  for(;;){const {done,value}=await rd.read(); if(done)break; partes.push(value); n+=value.length; onp(Math.min(1,n/(total||n)));}
+  const u=new Uint8Array(n); let o=0; for(const p of partes){u.set(p,o);o+=p.length;} return u;
+}
+async function descifrar(u){
+  return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:u.subarray(0,12)},KEY,u.subarray(12)));
+}
+async function doc(d,progId){
+  if(cache.has(d.f)) return cache.get(d.f);
+  const bar=progId&&$(progId); if(bar){bar.style.display='block';bar.firstChild.style.width='0';}
+  try{
+    const u=await bajarCifrado('d/'+d.f+'?v='+d.v,d.bytes+28,bar?(x=>bar.firstChild.style.width=(x*100).toFixed(0)+'%'):null);
+    const datos=await descifrar(u);
+    const res={datos,url:URL.createObjectURL(new Blob([datos],{type:'application/pdf'})),nombre:d.ruta.split('/').pop()};
+    cache.set(d.f,res); return res;
+  } finally { if(bar) setTimeout(()=>bar.style.display='none',300); }
+}
+function descargar(url,nombre){const a=document.createElement('a');a.href=url;a.download=nombre;document.body.appendChild(a);a.click();a.remove();}
+const movil=()=>matchMedia('(max-width:700px)').matches||/iPhone|iPad|Android/i.test(navigator.userAgent);
+
+let actual=null;
+async function ver(d,progId,btn){
+  // en el celular el visor dentro de la página no sirve: se abre en otra pestaña
+  const w=movil()?window.open('','_blank'):null;
+  if(btn) btn.disabled=true;
+  try{
+    const r=await doc(d,progId);
+    if(w){ w.location.href=r.url; return; }
+    actual={d,r};
+    $('vTitulo').textContent=(d.tab?d.tab+'  ':'')+d.titulo;
+    $('vFrame').src=r.url;
+    $('visor').classList.remove('hidden'); document.body.style.overflow='hidden';
+  }catch(e){ if(w) w.close(); alertar(d,e); }
+  finally{ if(btn) btn.disabled=false; }
+}
+async function bajar(d,progId,btn){
+  if(btn) btn.disabled=true;
+  try{ const r=await doc(d,progId); descargar(r.url,r.nombre); }
+  catch(e){ alertar(d,e); } finally{ if(btn) btn.disabled=false; }
+}
+function alertar(d,e){ console.error(e); const s=$('fecha'); s.textContent='No se pudo abrir «'+(d.tab||'índice')+'». Intente de nuevo.'; s.style.color='var(--bad)'; }
+$('vCerrar').onclick=()=>{ $('visor').classList.add('hidden'); $('vFrame').src='about:blank'; document.body.style.overflow=''; };
+$('vBajar').onclick=()=>actual&&descargar(actual.r.url,actual.r.nombre);
+$('vTab').onclick=()=>actual&&window.open(actual.r.url,'_blank');
+addEventListener('keydown',e=>{ if(e.key==='Escape'&&!$('visor').classList.contains('hidden')) $('vCerrar').click(); });
+
+// ---- ZIP sin compresión (los PDF ya vienen comprimidos) ----
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(u){let c=0xFFFFFFFF;for(let i=0;i<u.length;i++)c=CRC[(c^u[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0;}
+function hacerZip(files){
+  const enc=new TextEncoder(), partes=[], central=[]; let off=0;
+  const t=new Date(), hora=(t.getHours()<<11)|(t.getMinutes()<<5)|(t.getSeconds()>>1), dia=((t.getFullYear()-1980)<<9)|((t.getMonth()+1)<<5)|t.getDate();
+  for(const f of files){
+    const nm=enc.encode(f.nombre), crc=crc32(f.datos), sz=f.datos.length;
+    const h=new DataView(new ArrayBuffer(30));
+    h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint16(8,0,true);
+    h.setUint16(10,hora,true);h.setUint16(12,dia,true);h.setUint32(14,crc,true);h.setUint32(18,sz,true);h.setUint32(22,sz,true);
+    h.setUint16(26,nm.length,true);h.setUint16(28,0,true);
+    partes.push(h.buffer,nm,f.datos);
+    const c=new DataView(new ArrayBuffer(46));
+    c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint16(10,0,true);
+    c.setUint16(12,hora,true);c.setUint16(14,dia,true);c.setUint32(16,crc,true);c.setUint32(20,sz,true);c.setUint32(24,sz,true);
+    c.setUint16(28,nm.length,true);c.setUint32(38,0,true);c.setUint32(42,off,true);
+    central.push(c.buffer,nm);
+    off+=30+nm.length+sz;
+  }
+  const cd=central.reduce((a,b)=>a+b.byteLength,0), e=new DataView(new ArrayBuffer(22));
+  e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cd,true);e.setUint32(16,off,true);
+  return new Blob([...partes,...central,e.buffer],{type:'application/zip'});
+}
+$('zip').onclick=async()=>{
+  const btn=$('zip'), bar=$('p-zip'); btn.disabled=true; bar.style.display='block';
+  const todos=[M.inicio,...M.secciones.flatMap(s=>s.docs)];
+  try{
+    const files=[]; let i=0;
+    for(const d of todos){ const r=await doc(d); files.push({nombre:M.zip+'/'+d.ruta,datos:r.datos}); bar.firstChild.style.width=(++i/todos.length*100).toFixed(0)+'%'; }
+    descargar(URL.createObjectURL(hacerZip(files)),M.zip+'.zip');
+  }catch(e){ alertar({tab:'ZIP'},e); }
+  finally{ btn.disabled=false; setTimeout(()=>bar.style.display='none',600); }
+};
+
+function fila(d){
+  const row=document.createElement('div'); row.className='row';
+  const tab=document.createElement('div'); tab.className='tab'; tab.textContent=d.tab;
+  const t=document.createElement('div'); t.className='t';
+  const nom=document.createElement('div'); nom.textContent=d.titulo;
+  const sm=document.createElement('small'); sm.textContent=d.paginas+(d.paginas===1?' página':' páginas')+' · '+mb(d.bytes);
+  const pid='p-'+d.f.replace(/\W/g,''); const pr=document.createElement('div'); pr.className='prog'; pr.id=pid; pr.appendChild(document.createElement('i'));
+  t.append(nom,sm,pr);
+  const acts=document.createElement('div'); acts.className='acts';
+  const bv=document.createElement('button'); bv.textContent='Ver'; bv.onclick=()=>ver(d,pid,bv);
+  const bd=document.createElement('button'); bd.textContent='Descargar'; bd.onclick=()=>bajar(d,pid,bd);
+  acts.append(bv,bd); row.append(tab,t,acts); return row;
+}
+
+(async()=>{
+  const k=new URLSearchParams(location.hash.slice(1)).get('k');
+  if(!k){ fallo('Este enlace está incompleto','Para ver los documentos necesita el enlace completo que le enviaron.'); return; }
+  try{
+    if(!crypto.subtle) throw new Error('sin WebCrypto');
+    KEY=await crypto.subtle.importKey('raw',b64u(k),{name:'AES-GCM'},false,['decrypt']);
+    const u=await bajarCifrado('m.bin?t='+Date.now());
+    M=JSON.parse(new TextDecoder().decode(await descifrar(u)));
+  }catch(e){ console.error(e); fallo('No se pudo abrir','El enlace no es correcto o está incompleto. Copie el enlace completo, incluida la parte que va después de «#».'); return; }
+  document.title='Documentos: '+M.titulo;
+  $('titulo').textContent=M.titulo; $('sub').textContent=M.sub;
+  const n=1+M.secciones.reduce((a,s)=>a+s.docs.length,0);
+  $('cuenta').textContent=n+' documentos · '+mb(M.total);
+  $('fecha').textContent='Actualizado el '+M.actualizado;
+  $('inicioMeta').textContent=' '+M.inicio.paginas+' páginas, con el estado de cada documento, las alertas y la línea de tiempo.';
+  $('zipMeta').textContent=' Todos los PDF en sus carpetas, en un solo archivo de '+mb(M.total)+'.';
+  $('verInicio').onclick=()=>ver(M.inicio,'p-inicio',$('verInicio'));
+  $('bajarInicio').onclick=()=>bajar(M.inicio,'p-inicio',$('bajarInicio'));
+  const cont=$('secciones');
+  for(const s of M.secciones){
+    const sec=document.createElement('section');
+    const h=document.createElement('h2'); const nn=document.createElement('span'); nn.className='n'; nn.textContent=String(+s.num);
+    h.append(nn,document.createTextNode(s.nombre));
+    const list=document.createElement('div'); list.className='list';
+    s.docs.forEach(d=>list.appendChild(fila(d)));
+    sec.append(h,list); cont.appendChild(sec);
+  }
+  $('msg').classList.add('hidden'); $('app').classList.remove('hidden');
+})();
+</script>
+</body>
+</html>
